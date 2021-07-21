@@ -1,0 +1,13 @@
+{
+  "attivita": {
+    "spazio": "Mia attività",
+    "azioniDocumenti": {
+      "creazione": true,
+      "modifica": true,
+      "eliminazione": true
+    },
+    "dataInizio": "12/7",
+    "dataFine": "18/7",
+    "anno": 2021
+  }
+}
