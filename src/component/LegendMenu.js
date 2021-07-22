@@ -5,27 +5,33 @@ export default function LegendMenu({
   FirstEl,
   SecondEl,
   ThirdEl,
-  color1,
-  color2,
-  color3,
+  colorFirstEl,
+  colorSecondEl,
+  colorThirdEl,
 }) {
   return (
     <>
       <div className="legend-menu flex-column">
         <span>{Title}</span>
         <ul>
-          <li className="flex-start-row">
-            <FiberManualRecordIcon fill={color1} />
-            <h4>{FirstEl}</h4>
-          </li>
-          <li className="flex-start-row">
-            <FiberManualRecordIcon fill={color2} />
-            <h4>{SecondEl}</h4>
-          </li>
-          <li className="flex-start-row">
-            <FiberManualRecordIcon fill={color3} />
-            <h4>{ThirdEl}</h4>
-          </li>
+          {FirstEl ? (
+            <li className="flex-start-row">
+              <FiberManualRecordIcon style={{ color: colorFirstEl }} />
+              <h4>{FirstEl}</h4>
+            </li>
+          ) : null}
+          {SecondEl ? (
+            <li className="flex-start-row">
+              <FiberManualRecordIcon style={{ color: colorSecondEl }} />
+              <h4>{SecondEl}</h4>
+            </li>
+          ) : null}
+          {ThirdEl ? (
+            <li className="flex-start-row">
+              <FiberManualRecordIcon style={{ color: colorThirdEl }} />
+              <h4>{ThirdEl}</h4>
+            </li>
+          ) : null}
         </ul>
       </div>
     </>

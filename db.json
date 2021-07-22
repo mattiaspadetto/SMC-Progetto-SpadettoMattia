@@ -4,10 +4,11 @@
     "azioniDocumenti": {
       "creazione": true,
       "modifica": true,
-      "eliminazione": true
+      "eliminazione": false
     },
-    "dataInizio": "12/7",
-    "dataFine": "18/7",
-    "anno": 2021
+    "dataInizio": "1/7",
+    "dataFine": "31/7",
+    "anno": 2021,
+    "periodoVisualizzazione": "months"
   }
 }

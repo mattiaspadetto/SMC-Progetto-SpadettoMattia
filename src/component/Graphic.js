@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Rectangle from "./rectangle";
 import LabelTick from "./labelTick";
 import * as d3 from "d3-scale";
-import { useFetch} from "../Fetch/Fetch";
+import { useFetch } from "../Fetch/Fetch";
+import LabelPeriod from "./labelPeriod";
 
 // calcolo valori lungo asse delle ordinate
 
@@ -21,9 +22,9 @@ function calculateTicks(maxValue, minValue) {
   return ticks;
 }
 
-export default function Graphic({ azioneDocumenti }) {
+export default function Graphic({ azioneDocumenti, valuePeriod }) {
   const { data, isLoaded, error, fetchAgain } = useFetch(
-    "http://localhost:8010/data",
+    "http://localhost:8010/dataMonth",
     "GET"
   );
   const [timerCount, setTimerCount] = useState(0);
@@ -35,11 +36,11 @@ export default function Graphic({ azioneDocumenti }) {
     }
   }, [timerCount]);
 
-  const [maxValue, setMaxValue] = useState(350);
+  const maxValue = 350;
   const aspectRatio = 9 / 21;
   const canvasWidth = 800;
   const canvasHeight = canvasWidth * aspectRatio;
-  const canvasPadding = 10;
+  const canvasPadding = 20;
   const minValue = 0;
   const canvasHeightMin = 0;
   const yTicks = calculateTicks(maxValue, minValue);
@@ -49,8 +50,8 @@ export default function Graphic({ azioneDocumenti }) {
     .scaleBand()
     .domain(new Array(data.length).fill(0).map((_, index) => index))
     .range([0, canvasWidth - 10])
-    .paddingInner([0.1])
-    .paddingOuter([1]);
+    .paddingInner([0.3])
+    .paddingOuter([2]);
 
   const widthRect = xOfRect(1);
 
@@ -100,6 +101,11 @@ export default function Graphic({ azioneDocumenti }) {
 
               return (
                 <>
+                  <LabelPeriod
+                    x={xOfRect(index)}
+                    y={canvasHeight}
+                    valueLabelPeriod={valuePeriod + index}
+                  />
                   {azioneDocumenti["creazione"] === true ? (
                     <Rectangle
                       x={xOfRect(index)}
