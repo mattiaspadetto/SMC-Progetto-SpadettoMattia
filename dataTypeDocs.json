@@ -1,9 +1,9 @@
 {
     "dataTypeDocument": [
-        { "TipoUno": 30 },
-        { "TipoDue": 20 },
-        { "TipoTre": 17 },
-        { "TipoQuattro": 8 },
-        { "TipoCinque": 3 }
+        { "TipoUno": 30 ,
+         "TipoDue": 20 ,
+         "TipoTre": 17 ,
+         "TipoQuattro": 8 ,
+         "TipoCinque": 3 }
       ]
 }

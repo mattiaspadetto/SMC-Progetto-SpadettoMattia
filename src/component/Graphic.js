@@ -22,19 +22,23 @@ function calculateTicks(maxValue, minValue) {
   return ticks;
 }
 
-export default function Graphic({ azioneDocumenti, valuePeriod }) {
+const port = (period) => {
+  if (period === "weeks") {
+    return "dataweeks";
+  } else if (period === "months") {
+    return "datamonths";
+  }
+};
+
+export default function Graphic({ azioneDocumenti, valuePeriod, Period }) {
   const { data, isLoaded, error, fetchAgain } = useFetch(
-    "http://localhost:8010/dataWeek",
+    `http://localhost:8010/${port(Period)}`,
     "GET"
   );
-  const [timerCount, setTimerCount] = useState(0);
 
   useEffect(() => {
-    if (timerCount === 10) {
-      fetchAgain();
-      setTimerCount(0);
-    }
-  }, [timerCount]);
+    fetchAgain();
+  }, [Period]);
 
   const maxValue = 350;
   const aspectRatio = 9 / 21;

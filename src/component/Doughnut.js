@@ -9,11 +9,11 @@ export default function MyComponent() {
   );
 
   const typeDocs = [
-    { name: "Tipo 1", value: 30 },
-    { name: "Tipo 2", value: 20 },
-    { name: "Tipo 3", value: 17 },
-    { name: "Tipo 4", value: 12 },
-    { name: "Tipo 5", value: 4 },
+    { name: "TipoUno", value: data[0].TipoUno },
+    { name: "TipoDue", value: data[0].TipoDue },
+    { name: "TipoTre", value: data[0].TipoTre },
+    { name: "TIpoQuattro", value: data[0].TipoQuattro },
+    { name: "TipoCinque", value: data[0].TipoCinque },
   ];
 
   if (error) {

@@ -268,14 +268,14 @@ export default function ContentDashboard() {
             )}
           </Button>
           <span style={{ maxHeight: "5%" }}>
-            <h3>Report settimanale sull'attività documentale</h3>
+            <h3>Report sull'attività documentale</h3>
           </span>
           <div className="actionsGraphic flex-row">
             <div style={{ width: "70%" }}>
               <Graphic
                 azioneDocumenti={state.actionsDocs}
                 valuePeriod={calculatePeriod()}
-                period={state.period}
+                Period={state.period}
               />
             </div>
             <LegendMenu
@@ -297,7 +297,7 @@ export default function ContentDashboard() {
             />
           </div>
           <span style={{ maxHeight: "5%" }}>
-            <h3>Report settimanale sulla tipologia documentale</h3>
+            <h3>Report sulla tipologia documentale</h3>
           </span>
           <div className="actionsGraphic flex-row">
             <div style={{ width: "70%", textAlign: "center" }}>
