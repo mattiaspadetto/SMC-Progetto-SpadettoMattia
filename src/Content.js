@@ -6,7 +6,7 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import LegendMenu from "./component/LegendMenu";
 import { DateTime } from "luxon";
 import Graphic from "./component/Graphic";
-import MyComponent from "./component/Doughnut";
+import DoughnutGraphic from "./component/Doughnut";
 
 export default function ContentDashboard() {
   const [anchorEl, setAnchorEl] = React.useState(false);
@@ -301,7 +301,7 @@ export default function ContentDashboard() {
           </span>
           <div className="actionsGraphic flex-row">
             <div style={{ width: "70%", textAlign: "center" }}>
-              <MyComponent />
+              <DoughnutGraphic />
             </div>
             <LegendMenu
               Title={"Tipologia di documenti più utilizzati"}
