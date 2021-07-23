@@ -24,7 +24,7 @@ function calculateTicks(maxValue, minValue) {
 
 export default function Graphic({ azioneDocumenti, valuePeriod }) {
   const { data, isLoaded, error, fetchAgain } = useFetch(
-    "http://localhost:8010/dataMonth",
+    "http://localhost:8010/dataWeek",
     "GET"
   );
   const [timerCount, setTimerCount] = useState(0);
