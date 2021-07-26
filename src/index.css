@@ -28,10 +28,20 @@
   align-content: center;
   align-items: center;
 }
-@media only screen and (max-width: 1500px) {
+
+@media only screen and (max-width: 1200px) {
   .type-visualization-report div,
   span {
-    font-size: smaller;
+    font-size: 0.7rem;
+  }
+  .legend-menu {
+    font-size: 0.8rem;
+  }
+}
+@media only screen and (max-width: 950px) {
+  .type-visualization-report div,
+  span {
+    font-size: 0.6rem;
   }
 }
 
@@ -114,16 +124,43 @@ span {
 
 .legend-menu {
   width: 12rem;
+  max-height: auto;
   border: 1px solid var(--background-color);
   background-color: var(--background-color-dashboard);
   border-radius: 8px;
-  padding: 1em;
+  text-align: center;
 }
 
-.legend-menu span,
-li {
-  text-align: center;
-  padding: 0.8em;
+.legend-menu h4 {
+  width: 100%;
+  margin-left: 40%;
+  padding: 0.8rem 0 0.8rem 0;
+}
+
+#creazione {
+  color: green !important;
+}
+#modifica {
+  color: red !important;
+}
+#eliminazione {
+  color: orange !important;
+}
+
+#Tipo0 {
+  color: rgb(220, 57, 18) !important;
+}
+#Tipo1 {
+  color: rgb(255, 153, 0) !important;
+}
+#Tipo2 {
+  color: rgb(16, 150, 24) !important;
+}
+#Tipo3 {
+  color: rgb(153, 0, 153) !important;
+}
+#Tipo4 {
+  color: rgb(51, 102, 204) !important;
 }
 
 input {

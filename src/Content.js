@@ -3,15 +3,17 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import LegendMenu from "./component/LegendMenu";
 import { DateTime } from "luxon";
 import Graphic from "./component/Graphic";
 import DoughnutGraphic from "./component/Doughnut";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 
 export default function ContentDashboard() {
   const [anchorEl, setAnchorEl] = React.useState(false);
   const [selectOption, setSelectOption] = React.useState("Spazi condivisi");
   const options = ["Spazio 1", "Spazio 2", "Spazio 3"];
+  const docsType = ["Tipo 1", "Tipo 2", "Tipo 3"];
+  const docsAction = ["creazione", "modifica", "eliminazione"];
 
   const handleClick = () => {
     setAnchorEl(!anchorEl);
@@ -276,42 +278,47 @@ export default function ContentDashboard() {
                 azioneDocumenti={state.actionsDocs}
                 valuePeriod={calculatePeriod()}
                 Period={state.period}
+                MonthLength={state.date.daysInMonth}
               />
             </div>
-            <LegendMenu
-              Title={"Azioni sui documenti"}
-              FirstEl={
-                state.actionsDocs["creazione"] === true ? "Creazione" : null
-              }
-              SecondEl={
-                state.actionsDocs["modifica"] === true ? "Modifica" : null
-              }
-              ThirdEl={
-                state.actionsDocs["eliminazione"] === true
-                  ? "Eliminazione"
-                  : null
-              }
-              colorFirstEl={"green"}
-              colorSecondEl={"red"}
-              colorThirdEl={"orange"}
-            />
+
+            <div className="legend-menu flex-column">
+              <span>Azioni sui documenti</span>
+              {docsAction.map((action, index) => (
+                <h4 className="flex-start-row" key={index}>
+                  <FiberManualRecordIcon className="iconList" id={action} />
+                  {action}
+                </h4>
+              ))}
+            </div>
           </div>
           <span style={{ maxHeight: "5%" }}>
-            <h3>Report sulla tipologia documentale</h3>
+            <h3>
+              Report sulla tipologia di documenti:
+              {state.actionsDocs["creazione"] === true ? " creati" : null}
+              {state.actionsDocs["modifica"] === true ? " modificati" : null}
+              {state.actionsDocs["eliminazione"] === true ? " eliminati" : null}
+            </h3>
           </span>
           <div className="actionsGraphic flex-row">
             <div style={{ width: "70%", textAlign: "center" }}>
               <DoughnutGraphic />
             </div>
-            <LegendMenu
-              Title={"Tipologia di documenti più utilizzati"}
-              FirstEl={"Tipo 1"}
-              SecondEl={"Tipo 2"}
-              ThirdEl={"Tipo 3"}
-              colorFirstEl={"rgb(51, 102, 204)"}
-              colorSecondEl={"rgb(220, 57, 18)"}
-              colorThirdEl={"rgb(255, 153, 0)"}
-            />
+            <div
+              className="legend-menu flex-column"
+              /* style={{ overflowY: "scroll" }} */
+            >
+              <span>Tipologia di documenti più utilizzati</span>
+              {docsType.map((type, index) => (
+                <h4 className="flex-start-row" key={index}>
+                  <FiberManualRecordIcon
+                    className="iconList"
+                    id={`Tipo${index}`}
+                  />
+                  {type}
+                </h4>
+              ))}
+            </div>
           </div>
         </div>
       </div>

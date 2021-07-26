@@ -4,6 +4,7 @@ import LabelTick from "./labelTick";
 import * as d3 from "d3-scale";
 import { useFetch } from "../Fetch/Fetch";
 import LabelPeriod from "./labelPeriod";
+import { DateTime } from "luxon";
 
 // calcolo valori lungo asse delle ordinate
 
@@ -22,17 +23,22 @@ function calculateTicks(maxValue, minValue) {
   return ticks;
 }
 
-const port = (period) => {
-  if (period === "weeks") {
+const port = (Period) => {
+  if (Period === "weeks") {
     return "dataweeks";
-  } else if (period === "months") {
+  } else if (Period === "months") {
     return "datamonths";
-  } else if (period === "years") {
+  } else if (Period === "years") {
     return "datayears";
   }
 };
 
-export default function Graphic({ azioneDocumenti, valuePeriod, Period }) {
+export default function Graphic({
+  azioneDocumenti,
+  valuePeriod,
+  Period,
+  MonthLength,
+}) {
   const { data, isLoaded, error, fetchAgain } = useFetch(
     `http://localhost:8030/${port(Period)}`,
     "GET"
@@ -66,6 +72,29 @@ export default function Graphic({ azioneDocumenti, valuePeriod, Period }) {
     .scaleLinear()
     .domain([minValue, maxValue])
     .range([canvasHeight - canvasPadding, canvasHeightMin + canvasPadding]);
+
+  //calculate xTicks
+  const calculateLabelPeriod = () => {
+    if (Period === "weeks") {
+      let arrLabelPeriod = new Array(7);
+      let incrementDays = 1;
+      for (let i = 0; i < arrLabelPeriod.length; i++) {
+        if (valuePeriod + i > MonthLength) {
+          arrLabelPeriod[i] = incrementDays;
+          incrementDays++;
+        } else {
+          arrLabelPeriod[i] = valuePeriod + i;
+        }
+      }
+      return arrLabelPeriod;
+    } else if (Period === "months" || Period === "years") {
+      let arrLabelPeriod = new Array(MonthLength);
+      for (let i = 0; i < arrLabelPeriod.length; i++) {
+        arrLabelPeriod[i] = i + 1;
+      }
+      return arrLabelPeriod;
+    }
+  };
 
   if (error) {
     return <div>Error. Please refresh the page</div>;
@@ -105,12 +134,13 @@ export default function Graphic({ azioneDocumenti, valuePeriod, Period }) {
               let heightDeleted =
                 canvasHeight - yScale(data[index].deleted) - canvasPadding;
 
+              let time = DateTime.local().startOf("week").day;
               return (
                 <>
                   <LabelPeriod
                     x={xOfRect(index)}
                     y={canvasHeight}
-                    valueLabelPeriod={valuePeriod + index}
+                    valueLabelPeriod={calculateLabelPeriod()[index]}
                   />
                   {azioneDocumenti["creazione"] === true ? (
                     <Rectangle
