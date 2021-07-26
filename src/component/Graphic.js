@@ -27,12 +27,14 @@ const port = (period) => {
     return "dataweeks";
   } else if (period === "months") {
     return "datamonths";
+  } else if (period === "years") {
+    return "datayears";
   }
 };
 
 export default function Graphic({ azioneDocumenti, valuePeriod, Period }) {
   const { data, isLoaded, error, fetchAgain } = useFetch(
-    `http://localhost:8010/${port(Period)}`,
+    `http://localhost:8030/${port(Period)}`,
     "GET"
   );
 
@@ -40,7 +42,7 @@ export default function Graphic({ azioneDocumenti, valuePeriod, Period }) {
     fetchAgain();
   }, [Period]);
 
-  const maxValue = 350;
+  const maxValue = 100;
   const aspectRatio = 9 / 21;
   const canvasWidth = 800;
   const canvasHeight = canvasWidth * aspectRatio;

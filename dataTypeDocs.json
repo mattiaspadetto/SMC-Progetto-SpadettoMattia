@@ -1,9 +1,28 @@
 {
-    "dataTypeDocument": [
-        { "TipoUno": 30 ,
-         "TipoDue": 20 ,
-         "TipoTre": 17 ,
-         "TipoQuattro": 8 ,
-         "TipoCinque": 3 }
-      ]
+  "dataTypeDocs": [
+    {
+      "name": 0,
+      "value": 2
+    },
+    {
+      "name": 1,
+      "value": 9
+    },
+    {
+      "name": 2,
+      "value": 6
+    },
+    {
+      "name": 3,
+      "value": 29
+    },
+    {
+      "name": 4,
+      "value": 16
+    },
+    {
+      "name": 5,
+      "value": 22
+    }
+  ]
 }

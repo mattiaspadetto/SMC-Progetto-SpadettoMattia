@@ -1,0 +1,308 @@
+{
+  "dataweeks": [
+    {
+      "day": 0,
+      "create": 30,
+      "change": 19,
+      "deleted": 6
+    },
+    {
+      "day": 1,
+      "create": 15,
+      "change": 18,
+      "deleted": 18
+    },
+    {
+      "day": 2,
+      "create": 24,
+      "change": 17,
+      "deleted": 16
+    },
+    {
+      "day": 3,
+      "create": 6,
+      "change": 18,
+      "deleted": 19
+    },
+    {
+      "day": 4,
+      "create": 7,
+      "change": 3,
+      "deleted": 14
+    },
+    {
+      "day": 5,
+      "create": 25,
+      "change": 4,
+      "deleted": 4
+    },
+    {
+      "day": 6,
+      "create": 20,
+      "change": 6,
+      "deleted": 23
+    }
+  ],
+  "datamonths": [
+    {
+      "day": 0,
+      "create": 24,
+      "change": 21,
+      "deleted": 11
+    },
+    {
+      "day": 1,
+      "create": 10,
+      "change": 16,
+      "deleted": 0
+    },
+    {
+      "day": 2,
+      "create": 10,
+      "change": 11,
+      "deleted": 4
+    },
+    {
+      "day": 3,
+      "create": 10,
+      "change": 4,
+      "deleted": 27
+    },
+    {
+      "day": 4,
+      "create": 11,
+      "change": 11,
+      "deleted": 4
+    },
+    {
+      "day": 5,
+      "create": 25,
+      "change": 24,
+      "deleted": 4
+    },
+    {
+      "day": 6,
+      "create": 5,
+      "change": 11,
+      "deleted": 24
+    },
+    {
+      "day": 7,
+      "create": 18,
+      "change": 20,
+      "deleted": 9
+    },
+    {
+      "day": 8,
+      "create": 23,
+      "change": 6,
+      "deleted": 17
+    },
+    {
+      "day": 9,
+      "create": 20,
+      "change": 13,
+      "deleted": 19
+    },
+    {
+      "day": 10,
+      "create": 7,
+      "change": 12,
+      "deleted": 26
+    },
+    {
+      "day": 11,
+      "create": 27,
+      "change": 15,
+      "deleted": 29
+    },
+    {
+      "day": 12,
+      "create": 26,
+      "change": 16,
+      "deleted": 19
+    },
+    {
+      "day": 13,
+      "create": 7,
+      "change": 7,
+      "deleted": 14
+    },
+    {
+      "day": 14,
+      "create": 26,
+      "change": 13,
+      "deleted": 0
+    },
+    {
+      "day": 15,
+      "create": 14,
+      "change": 20,
+      "deleted": 17
+    },
+    {
+      "day": 16,
+      "create": 14,
+      "change": 19,
+      "deleted": 5
+    },
+    {
+      "day": 17,
+      "create": 19,
+      "change": 30,
+      "deleted": 24
+    },
+    {
+      "day": 18,
+      "create": 29,
+      "change": 22,
+      "deleted": 23
+    },
+    {
+      "day": 19,
+      "create": 15,
+      "change": 19,
+      "deleted": 11
+    },
+    {
+      "day": 20,
+      "create": 2,
+      "change": 3,
+      "deleted": 17
+    },
+    {
+      "day": 21,
+      "create": 4,
+      "change": 2,
+      "deleted": 8
+    },
+    {
+      "day": 22,
+      "create": 23,
+      "change": 18,
+      "deleted": 22
+    },
+    {
+      "day": 23,
+      "create": 15,
+      "change": 24,
+      "deleted": 23
+    },
+    {
+      "day": 24,
+      "create": 28,
+      "change": 24,
+      "deleted": 28
+    },
+    {
+      "day": 25,
+      "create": 29,
+      "change": 21,
+      "deleted": 0
+    },
+    {
+      "day": 26,
+      "create": 26,
+      "change": 16,
+      "deleted": 29
+    },
+    {
+      "day": 27,
+      "create": 20,
+      "change": 24,
+      "deleted": 4
+    },
+    {
+      "day": 28,
+      "create": 14,
+      "change": 2,
+      "deleted": 14
+    },
+    {
+      "day": 29,
+      "create": 8,
+      "change": 18,
+      "deleted": 25
+    },
+    {
+      "day": 30,
+      "create": 27,
+      "change": 12,
+      "deleted": 14
+    }
+  ],
+  "datayears": [
+    {
+      "month": 0,
+      "create": 17,
+      "change": 6,
+      "deleted": 26
+    },
+    {
+      "month": 1,
+      "create": 24,
+      "change": 2,
+      "deleted": 2
+    },
+    {
+      "month": 2,
+      "create": 29,
+      "change": 6,
+      "deleted": 30
+    },
+    {
+      "month": 3,
+      "create": 20,
+      "change": 28,
+      "deleted": 1
+    },
+    {
+      "month": 4,
+      "create": 7,
+      "change": 15,
+      "deleted": 7
+    },
+    {
+      "month": 5,
+      "create": 18,
+      "change": 8,
+      "deleted": 29
+    },
+    {
+      "month": 6,
+      "create": 29,
+      "change": 10,
+      "deleted": 13
+    },
+    {
+      "month": 7,
+      "create": 4,
+      "change": 29,
+      "deleted": 12
+    },
+    {
+      "month": 8,
+      "create": 16,
+      "change": 0,
+      "deleted": 21
+    },
+    {
+      "month": 9,
+      "create": 12,
+      "change": 14,
+      "deleted": 3
+    },
+    {
+      "month": 10,
+      "create": 2,
+      "change": 24,
+      "deleted": 13
+    },
+    {
+      "month": 11,
+      "create": 22,
+      "change": 29,
+      "deleted": 25
+    }
+  ]
+}

@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DonutChart from "react-svg-donut";
 import { useFetch } from "../Fetch/Fetch";
 
 export default function DoughnutGraphic() {
   const { data, isLoaded, error, fetchAgain } = useFetch(
-    "http://localhost:8011/dataTypeDocument",
+    "http://localhost:8040/dataTypeDocs",
     "GET"
   );
 
   const typeDocs = [
-    { name: "TipoUno", value: 30 },
-    { name: "TipoDue", value: 20 },
-    { name: "TipoTre", value: 9 },
-    { name: "TIpoQuattro", value: 7 },
-    { name: "TipoCinque", value: 4 },
+    {
+      name: 0,
+      value: 2,
+    },
+    {
+      name: 1,
+      value: 9,
+    },
+    {
+      name: 2,
+      value: 6,
+    },
+    {
+      name: 3,
+      value: 29,
+    },
+    {
+      name: 4,
+      value: 16,
+    },
+    {
+      name: 5,
+      value: 22,
+    },
   ];
 
   if (error) {
