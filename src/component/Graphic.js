@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Rectangle from "./rectangle";
 import LabelTick from "./labelTick";
 import * as d3 from "d3-scale";
 import { useFetch } from "../Fetch/Fetch";
 import LabelPeriod from "./labelPeriod";
-import { DateTime } from "luxon";
 
 // calcolo valori lungo asse delle ordinate
 
@@ -64,8 +63,6 @@ export default function Graphic({
     .range([0, canvasWidth - 10])
     .paddingInner([0.3])
     .paddingOuter([2]);
-
-  const widthRect = xOfRect(1);
 
   //calculate y position rect
   const yScale = d3
@@ -134,7 +131,6 @@ export default function Graphic({
               let heightDeleted =
                 canvasHeight - yScale(data[index].deleted) - canvasPadding;
 
-              let time = DateTime.local().startOf("week").day;
               return (
                 <>
                   <LabelPeriod

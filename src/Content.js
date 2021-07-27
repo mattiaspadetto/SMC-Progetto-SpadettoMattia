@@ -304,10 +304,7 @@ export default function ContentDashboard() {
             <div style={{ width: "70%", textAlign: "center" }}>
               <DoughnutGraphic />
             </div>
-            <div
-              className="legend-menu flex-column"
-              /* style={{ overflowY: "scroll" }} */
-            >
+            <div className="legend-menu flex-column">
               <span>Tipologia di documenti più utilizzati</span>
               {docsType.map((type, index) => (
                 <h4 className="flex-start-row" key={index}>
