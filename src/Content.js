@@ -57,16 +57,6 @@ export default function ContentDashboard() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const calculatePeriod = () => {
-    if (state.period === "weeks") {
-      return state.date.startOf("week").day;
-    } else if (state.period === "months") {
-      return state.date.startOf("month").day;
-    } else {
-      return state.date.startOf("year").month;
-    }
-  };
-
   const startDataTime =
     state.period === "weeks"
       ? state.date.startOf("week").day + "/" + state.date.startOf("week").month
@@ -276,9 +266,7 @@ export default function ContentDashboard() {
             <div style={{ width: "70%" }}>
               <Graphic
                 azioneDocumenti={state.actionsDocs}
-                valuePeriod={calculatePeriod()}
                 Period={state.period}
-                MonthLength={state.date.daysInMonth}
               />
             </div>
 

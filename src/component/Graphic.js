@@ -22,32 +22,19 @@ function calculateTicks(maxValue, minValue) {
   return ticks;
 }
 
-const port = (Period) => {
-  if (Period === "weeks") {
-    return "dataweeks";
-  } else if (Period === "months") {
-    return "datamonths";
-  } else if (Period === "years") {
-    return "datayears";
-  }
-};
-
-export default function Graphic({
-  azioneDocumenti,
-  valuePeriod,
-  Period,
-  MonthLength,
-}) {
+export default function Graphic({ azioneDocumenti, Period }) {
   const { data, isLoaded, error, fetchAgain } = useFetch(
-    `http://localhost:8030/${port(Period)}`,
+    `http://localhost:8030/values`,
     "GET"
   );
+
+  const dataReverse = data.map((obj) => ({ ...obj })).reverse();
 
   useEffect(() => {
     fetchAgain();
   }, [Period]);
 
-  const maxValue = 100;
+  const maxValue = 35;
   const aspectRatio = 9 / 21;
   const canvasWidth = 800;
   const canvasHeight = canvasWidth * aspectRatio;
@@ -70,29 +57,6 @@ export default function Graphic({
     .domain([minValue, maxValue])
     .range([canvasHeight - canvasPadding, canvasHeightMin + canvasPadding]);
 
-  //calculate xTicks
-  const calculateLabelPeriod = () => {
-    if (Period === "weeks") {
-      let arrLabelPeriod = new Array(7);
-      let incrementDays = 1;
-      for (let i = 0; i < arrLabelPeriod.length; i++) {
-        if (valuePeriod + i > MonthLength) {
-          arrLabelPeriod[i] = incrementDays;
-          incrementDays++;
-        } else {
-          arrLabelPeriod[i] = valuePeriod + i;
-        }
-      }
-      return arrLabelPeriod;
-    } else if (Period === "months" || Period === "years") {
-      let arrLabelPeriod = new Array(MonthLength);
-      for (let i = 0; i < arrLabelPeriod.length; i++) {
-        arrLabelPeriod[i] = i + 1;
-      }
-      return arrLabelPeriod;
-    }
-  };
-
   if (error) {
     return <div>Error. Please refresh the page</div>;
   } else if (!isLoaded) {
@@ -111,11 +75,13 @@ export default function Graphic({
               />
             ))}
 
-            {data.map((value, index) => {
+            {dataReverse.map((value, index) => {
               const heightCreate = () => {
                 if (azioneDocumenti["creazione"] === true) {
                   return (
-                    canvasHeight - yScale(data[index].create) - canvasPadding
+                    canvasHeight -
+                    yScale(dataReverse[index].create) -
+                    canvasPadding
                   );
                 } else return 0;
               };
@@ -123,38 +89,42 @@ export default function Graphic({
               const heightChange = () => {
                 if (azioneDocumenti["modifica"] === true) {
                   return (
-                    canvasHeight - yScale(data[index].change) - canvasPadding
+                    canvasHeight -
+                    yScale(dataReverse[index].change) -
+                    canvasPadding
                   );
                 } else return 0;
               };
 
               let heightDeleted =
-                canvasHeight - yScale(data[index].deleted) - canvasPadding;
+                canvasHeight -
+                yScale(dataReverse[index].delete) -
+                canvasPadding;
 
               return (
                 <>
                   <LabelPeriod
                     x={xOfRect(index)}
                     y={canvasHeight}
-                    valueLabelPeriod={calculateLabelPeriod()[index]}
+                    valueLabelPeriod={dataReverse[index].day}
                   />
                   {azioneDocumenti["creazione"] === true ? (
                     <Rectangle
                       x={xOfRect(index)}
-                      y={yScale(data[index].create)}
+                      y={yScale(dataReverse[index].create)}
                       height={heightCreate()}
                       width={xOfRect.bandwidth()}
-                      value={data[index].create}
+                      value={dataReverse[index].create}
                       colorRect={"green"}
                     />
                   ) : null}
                   {azioneDocumenti["modifica"] === true ? (
                     <Rectangle
                       x={xOfRect(index)}
-                      y={yScale(data[index].change) - heightCreate()}
+                      y={yScale(dataReverse[index].change) - heightCreate()}
                       height={heightChange()}
                       width={xOfRect.bandwidth()}
-                      value={data[index].change}
+                      value={dataReverse[index].change}
                       colorRect={"red"}
                     />
                   ) : null}
@@ -162,13 +132,13 @@ export default function Graphic({
                     <Rectangle
                       x={xOfRect(index)}
                       y={
-                        yScale(data[index].deleted) -
+                        yScale(dataReverse[index].delete) -
                         heightCreate() -
                         heightChange()
                       }
                       height={heightDeleted}
                       width={xOfRect.bandwidth()}
-                      value={data[index].deleted}
+                      value={dataReverse[index].delete}
                       colorRect={"orange"}
                     />
                   ) : null}
