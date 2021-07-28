@@ -86,9 +86,14 @@ export default function ContentDashboard() {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify(requestToServer),
-  }).then(() => {
-    console.log("Send Request");
-  });
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 
   return (
     <>

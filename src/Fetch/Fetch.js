@@ -4,7 +4,7 @@ export const useFetch = (url, method) => {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
-  const [fetchAgain, setFetchAgain] = useState(true);
+  const [fetchAgain, setFetchAgain] = useState(false);
 
   useEffect(() => {
     fetch(url, { method: method })

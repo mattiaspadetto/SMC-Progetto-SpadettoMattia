@@ -42,7 +42,7 @@ export default function DoughnutGraphic() {
   } else { */
   return (
     <DonutChart
-      size={300}
+      size={250}
       title={"Documenti"}
       data={typeDocs}
       onHover={(i) => {
