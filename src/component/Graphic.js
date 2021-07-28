@@ -36,7 +36,7 @@ export default function Graphic({ azioneDocumenti, Period }) {
 
   const maxValue = 35;
   const aspectRatio = 9 / 21;
-  const canvasWidth = 800;
+  const canvasWidth = 700;
   const canvasHeight = canvasWidth * aspectRatio;
   const canvasPadding = 20;
   const minValue = 0;
@@ -106,7 +106,11 @@ export default function Graphic({ azioneDocumenti, Period }) {
                   <LabelPeriod
                     x={xOfRect(index)}
                     y={canvasHeight}
-                    valueLabelPeriod={dataReverse[index].day}
+                    valueLabelPeriod={
+                      Period === "weeks" || Period === "months"
+                        ? dataReverse[index].day
+                        : dataReverse[index].month
+                    }
                   />
                   {azioneDocumenti["creazione"] === true ? (
                     <Rectangle

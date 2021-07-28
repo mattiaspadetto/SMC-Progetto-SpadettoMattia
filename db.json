@@ -1,14 +1,14 @@
 {
   "attivita": {
-    "spazio": "Spazio 1",
+    "spazio": "Mia attività",
     "azioniDocumenti": {
       "creazione": true,
       "modifica": true,
       "eliminazione": true
     },
-    "dataInizio": "1/7",
-    "dataFine": "31/7",
+    "dataInizio": "26/7",
+    "dataFine": "1/8",
     "anno": 2021,
-    "periodoVisualizzazione": "months"
+    "periodoVisualizzazione": "weeks"
   }
 }

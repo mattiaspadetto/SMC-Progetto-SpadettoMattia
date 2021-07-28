@@ -3,11 +3,22 @@ const app = express();
 const port = 3001;
 
 const dati = {
-  data: [{ dato1: 12 }, { dato1: 2 }, { dato1: 6 }, { dato1: 23 }],
+  error: [false],
+  values: [
+    { day: 25, month: 7, year: 2021, create: 4, change: 2, delete: 5 },
+    { day: 24, month: 7, year: 2021, create: 5, change: 6, delete: 1 },
+    { day: 23, month: 7, year: 2021, create: 4, change: 4, delete: 3 },
+    { day: 22, month: 7, year: 2021, create: 1, change: 8, delete: 2 },
+    { day: 21, month: 7, year: 2021, create: 5, change: 7, delete: 6 },
+    { day: 20, month: 7, year: 2021, create: 8, change: 9, delete: 9 },
+    { day: 19, month: 7, year: 2021, create: 3, change: 2, delete: 3 },
+  ],
 };
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
-  res.send(dati.data);
+  res.send(dati.values);
 });
 
 app.listen(port, () => {

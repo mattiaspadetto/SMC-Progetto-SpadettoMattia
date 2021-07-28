@@ -15,10 +15,6 @@ export default function ContentDashboard() {
   const docsType = ["Tipo 1", "Tipo 2", "Tipo 3"];
   const docsAction = ["creazione", "modifica", "eliminazione"];
 
-  const handleClick = () => {
-    setAnchorEl(!anchorEl);
-  };
-
   const initialState = {
     space: "Mia attività",
     actionsDocs: { creazione: true, modifica: true, eliminazione: true },
@@ -111,7 +107,7 @@ export default function ContentDashboard() {
             <Button
               color={state.space === selectOption ? "primary" : "default"}
             >
-              <span onClick={handleClick}>{selectOption}</span>
+              <span onClick={() => setAnchorEl(!anchorEl)}>{selectOption}</span>
               {anchorEl ? (
                 <div className="dropdown-menu flex-column">
                   {options.map((option, index) => (
@@ -278,10 +274,10 @@ export default function ContentDashboard() {
             <div className="legend-menu flex-column">
               <span>Azioni sui documenti</span>
               {docsAction.map((action, index) => (
-                <h4 className="flex-start-row" key={index}>
+                <span className="flex-start-row" key={index}>
                   <FiberManualRecordIcon className="iconList" id={action} />
                   {action}
-                </h4>
+                </span>
               ))}
             </div>
           </div>
@@ -300,13 +296,11 @@ export default function ContentDashboard() {
             <div className="legend-menu flex-column">
               <span>Tipologia di documenti più utilizzati</span>
               {docsType.map((type, index) => (
-                <h4 className="flex-start-row" key={index}>
-                  <FiberManualRecordIcon
-                    className="iconList"
-                    id={`Tipo${index}`}
-                  />
+                <span className="flex-start-row" key={index}>
+                  <FiberManualRecordIcon id={`Tipo${index}`} />
                   {type}
-                </h4>
+                  <h3 style={{ paddingLeft: "1.5rem" }}>{index}</h3>
+                </span>
               ))}
             </div>
           </div>
