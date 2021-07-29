@@ -24,7 +24,7 @@ function calculateTicks(maxValue, minValue) {
 
 export default function Graphic({ azioneDocumenti, Period }) {
   const { data, isLoaded, error, fetchAgain } = useFetch(
-    `http://localhost:8030/values`,
+    `https://0d450c30-f4c4-473c-bdca-26c76b4300aa.mock.pstmn.io/data`,
     "GET"
   );
 
@@ -34,7 +34,7 @@ export default function Graphic({ azioneDocumenti, Period }) {
     fetchAgain();
   }, [Period]);
 
-  const maxValue = 35;
+  const maxValue = 3000;
   const aspectRatio = 9 / 21;
   const canvasWidth = 700;
   const canvasHeight = canvasWidth * aspectRatio;
