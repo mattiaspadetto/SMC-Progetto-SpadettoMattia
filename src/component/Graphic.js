@@ -23,12 +23,16 @@ function calculateTicks(maxValue, minValue) {
 }
 
 export default function Graphic({ azioneDocumenti, Period }) {
+  const port = Period === "weeks" ? "Week" : "Month";
+
   const { data, isLoaded, error, fetchAgain } = useFetch(
-    `https://0d450c30-f4c4-473c-bdca-26c76b4300aa.mock.pstmn.io/data`,
+    `https://0d450c30-f4c4-473c-bdca-26c76b4300aa.mock.pstmn.io/data${port}/`,
     "GET"
   );
 
   const dataReverse = data.map((obj) => ({ ...obj })).reverse();
+
+  console.log(dataReverse);
 
   useEffect(() => {
     fetchAgain();
