@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -7,6 +7,7 @@ import { DateTime } from "luxon";
 import Graphic from "./component/Graphic";
 import DoughnutGraphic from "./component/Doughnut";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import { useFetch } from "./Fetch/Fetch";
 
 export default function ContentDashboard() {
   const [anchorEl, setAnchorEl] = React.useState(false);
@@ -119,221 +120,248 @@ export default function ContentDashboard() {
       console.error("Error:", error);
     });
 
-  return (
-    <>
-      <div className="content">
-        <div className="header flex-start-row">
-          <ButtonGroup variant="text">
-            <Button
-              color={state.space === "Mia attività" ? "primary" : "default"}
-              onClick={() =>
-                dispatch({ type: "setSpace", payload: "Mia attività" })
-              }
-            >
-              Mia attività
-            </Button>
-            <Button
-              color={state.space === selectOption ? "primary" : "default"}
-            >
-              <span onClick={() => setAnchorEl(!anchorEl)}>{selectOption}</span>
-              {anchorEl ? (
-                <div className="dropdown-menu flex-column">
-                  {options.map((option, index) => (
-                    <span
-                      key={index}
-                      color={"default"}
-                      onClick={() => {
-                        setAnchorEl(false);
-                        setSelectOption(option);
-                        dispatch({ type: "setSpace", payload: option });
-                      }}
-                    >
-                      {option}
-                    </span>
-                  ))}
-                </div>
-              ) : null}
-            </Button>
-            <Button
-              color={state.space === "Globale" ? "primary" : "default"}
-              onClick={() => dispatch({ type: "setSpace", payload: "Globale" })}
-            >
-              Globale
-            </Button>
-          </ButtonGroup>
-        </div>
-        <div className="type-visualization-report flex-row">
-          <div>
-            <span>Azioni sui documenti: </span>
-            <ButtonGroup>
+  const { data, isLoaded, error, fetchAgain } = useFetch(
+    "https://0d450c30-f4c4-473c-bdca-26c76b4300aa.mock.pstmn.io/dataTypeDocs/",
+    "GET"
+  );
+
+  useEffect(() => {
+    fetchAgain();
+  }, [state.period]);
+
+  if (error) {
+    return <div>Error. Please refresh the page</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else if (data && data.length) {
+    return (
+      <>
+        <div className="content">
+          <div className="header flex-start-row">
+            <ButtonGroup variant="text">
               <Button
-                color={
-                  state.actionsDocs["creazione"] === true
-                    ? "primary"
-                    : "default"
-                }
+                color={state.space === "Mia attività" ? "primary" : "default"}
                 onClick={() =>
-                  dispatch({
-                    type: "setActionDocs",
-                    payload: "creazione",
-                  })
+                  dispatch({ type: "setSpace", payload: "Mia attività" })
                 }
               >
-                Creazione
+                Mia attività
               </Button>
               <Button
-                color={
-                  state.actionsDocs["modifica"] === true ? "primary" : "default"
-                }
-                onClick={() =>
-                  dispatch({
-                    type: "setActionDocs",
-                    payload: "modifica",
-                  })
-                }
+                color={state.space === selectOption ? "primary" : "default"}
               >
-                Modifica
+                <span onClick={() => setAnchorEl(!anchorEl)}>
+                  {selectOption}
+                </span>
+                {anchorEl ? (
+                  <div className="dropdown-menu flex-column">
+                    {options.map((option, index) => (
+                      <span
+                        key={index}
+                        color={"default"}
+                        onClick={() => {
+                          setAnchorEl(false);
+                          setSelectOption(option);
+                          dispatch({ type: "setSpace", payload: option });
+                        }}
+                      >
+                        {option}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
               </Button>
               <Button
-                color={
-                  state.actionsDocs["eliminazione"] === true
-                    ? "primary"
-                    : "default"
-                }
+                color={state.space === "Globale" ? "primary" : "default"}
                 onClick={() =>
-                  dispatch({
-                    type: "setActionDocs",
-                    payload: "eliminazione",
-                  })
+                  dispatch({ type: "setSpace", payload: "Globale" })
                 }
               >
-                Eliminazione
+                Globale
               </Button>
             </ButtonGroup>
           </div>
-          <div>
-            <span>Visualizza per: </span>
-            <ButtonGroup>
-              <Button
-                color={state.period === "weeks" ? "primary" : "default"}
-                onClick={() =>
-                  dispatch({
-                    type: "setPeriod",
-                    payload: "weeks",
-                  })
-                }
-              >
-                Settimana
-              </Button>
-              <Button
-                color={state.period === "months" ? "primary" : "default"}
-                onClick={() =>
-                  dispatch({
-                    type: "setPeriod",
-                    payload: "months",
-                  })
-                }
-              >
-                Mese
-              </Button>
-              <Button
-                color={state.period === "years" ? "primary" : "default"}
-                onClick={() =>
-                  dispatch({
-                    type: "setPeriod",
-                    payload: "years",
-                  })
-                }
-              >
-                Anno
-              </Button>
-            </ButtonGroup>
+          <div className="type-visualization-report flex-row">
+            <div>
+              <span>Azioni sui documenti: </span>
+              <ButtonGroup>
+                <Button
+                  color={
+                    state.actionsDocs["creazione"] === true
+                      ? "primary"
+                      : "default"
+                  }
+                  onClick={() =>
+                    dispatch({
+                      type: "setActionDocs",
+                      payload: "creazione",
+                    })
+                  }
+                >
+                  Creazione
+                </Button>
+                <Button
+                  color={
+                    state.actionsDocs["modifica"] === true
+                      ? "primary"
+                      : "default"
+                  }
+                  onClick={() =>
+                    dispatch({
+                      type: "setActionDocs",
+                      payload: "modifica",
+                    })
+                  }
+                >
+                  Modifica
+                </Button>
+                <Button
+                  color={
+                    state.actionsDocs["eliminazione"] === true
+                      ? "primary"
+                      : "default"
+                  }
+                  onClick={() =>
+                    dispatch({
+                      type: "setActionDocs",
+                      payload: "eliminazione",
+                    })
+                  }
+                >
+                  Eliminazione
+                </Button>
+              </ButtonGroup>
+            </div>
+            <div>
+              <span>Visualizza per: </span>
+              <ButtonGroup>
+                <Button
+                  color={state.period === "weeks" ? "primary" : "default"}
+                  onClick={() =>
+                    dispatch({
+                      type: "setPeriod",
+                      payload: "weeks",
+                    })
+                  }
+                >
+                  Settimana
+                </Button>
+                <Button
+                  color={state.period === "months" ? "primary" : "default"}
+                  onClick={() =>
+                    dispatch({
+                      type: "setPeriod",
+                      payload: "months",
+                    })
+                  }
+                >
+                  Mese
+                </Button>
+                <Button
+                  color={state.period === "years" ? "primary" : "default"}
+                  onClick={() =>
+                    dispatch({
+                      type: "setPeriod",
+                      payload: "years",
+                    })
+                  }
+                >
+                  Anno
+                </Button>
+              </ButtonGroup>
+            </div>
           </div>
-        </div>
-        <div className="report flex-column">
-          <Button className="flex-row">
-            <ArrowBackIosIcon
-              style={{ cursor: "pointer" }}
-              onClick={() =>
-                dispatch({
-                  type: "decrementPeriod",
-                })
-              }
-            />
-            {state.period === "weeks" ? (
-              <span>
-                {state.date.startOf("week").day}{" "}
-                {state.date.startOf("week").monthLong} -{" "}
-                {state.date.endOf("week").day}{" "}
-                {state.date.endOf("week").monthLong} {state.date.year}
-              </span>
-            ) : null}
-            {state.period === "months" ? (
-              <span>
-                {state.date.monthLong} {state.date.year}
-              </span>
-            ) : null}
-            {state.period === "years" ? (
-              <span>Anno {state.date.year}</span>
-            ) : null}
-            {state.date.plus({ [state.period]: 1 }) >
-            initialState.date ? null : (
-              <ArrowForwardIosIcon
+          <div className="report flex-column">
+            <Button className="flex-row">
+              <ArrowBackIosIcon
                 style={{ cursor: "pointer" }}
                 onClick={() =>
                   dispatch({
-                    type: "incrementPeriod",
+                    type: "decrementPeriod",
                   })
                 }
               />
-            )}
-          </Button>
-          <span style={{ maxHeight: "5%" }}>
-            <h3>Report sull'attività documentale</h3>
-          </span>
-          <div className="actionsGraphic flex-row">
-            <div style={{ width: "70%" }}>
-              <Graphic
-                azioneDocumenti={state.actionsDocs}
-                Period={state.period}
-              />
-            </div>
+              {state.period === "weeks" ? (
+                <span>
+                  {state.date.startOf("week").day}{" "}
+                  {state.date.startOf("week").monthLong} -{" "}
+                  {state.date.endOf("week").day}{" "}
+                  {state.date.endOf("week").monthLong} {state.date.year}
+                </span>
+              ) : null}
+              {state.period === "months" ? (
+                <span>
+                  {state.date.monthLong} {state.date.year}
+                </span>
+              ) : null}
+              {state.period === "years" ? (
+                <span>Anno {state.date.year}</span>
+              ) : null}
+              {state.date.plus({ [state.period]: 1 }) >
+              initialState.date ? null : (
+                <ArrowForwardIosIcon
+                  style={{ cursor: "pointer" }}
+                  onClick={() =>
+                    dispatch({
+                      type: "incrementPeriod",
+                    })
+                  }
+                />
+              )}
+            </Button>
+            <span style={{ maxHeight: "5%" }}>
+              <h3>Report sull'attività documentale</h3>
+            </span>
+            <div className="actionsGraphic flex-row">
+              <div style={{ width: "70%" }}>
+                <Graphic
+                  azioneDocumenti={state.actionsDocs}
+                  Period={state.period}
+                />
+              </div>
 
-            <div className="legend-menu flex-column">
-              <span>Azioni sui documenti</span>
-              {docsAction.map((action, index) => (
-                <span className="flex-start-row" key={index}>
-                  <FiberManualRecordIcon className="iconList" id={action} />
-                  {action}
-                </span>
-              ))}
+              <div className="legend-menu flex-column">
+                <span>Azioni sui documenti</span>
+                {docsAction.map((action, index) => (
+                  <span className="flex-start-row" key={index}>
+                    <FiberManualRecordIcon className="iconList" id={action} />
+                    {action}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-          <span style={{ maxHeight: "5%" }}>
-            <h3>
-              Report sulla tipologia di documenti:
-              {state.actionsDocs["creazione"] === true ? " creati" : null}
-              {state.actionsDocs["modifica"] === true ? " modificati" : null}
-              {state.actionsDocs["eliminazione"] === true ? " eliminati" : null}
-            </h3>
-          </span>
-          <div className="actionsGraphic flex-row">
-            <div style={{ width: "70%", textAlign: "center" }}>
-              <DoughnutGraphic />
-            </div>
-            <div className="legend-menu flex-column">
-              <span>Tipologia di documenti più utilizzati</span>
-              {docsType.map((type, index) => (
-                <span className="flex-start-row" key={index}>
-                  <FiberManualRecordIcon id={`Tipo${index}`} />
-                  {type}
-                  <h3 style={{ paddingLeft: "1.5rem" }}>{index}</h3>
-                </span>
-              ))}
+            <span style={{ maxHeight: "5%" }}>
+              <h3>
+                Report sulla tipologia di documenti:
+                {state.actionsDocs["creazione"] === true ? " creati" : null}
+                {state.actionsDocs["modifica"] === true ? " modificati" : null}
+                {state.actionsDocs["eliminazione"] === true
+                  ? " eliminati"
+                  : null}
+              </h3>
+            </span>
+            <div className="actionsGraphic flex-row">
+              <div style={{ width: "70%", textAlign: "center" }}>
+                <DoughnutGraphic dataDonut={data} />
+              </div>
+              <div className="legend-menu flex-column">
+                <span>Tipologia di documenti più utilizzati</span>
+                {docsType.map((type, index) => (
+                  <span className="flex-start-row" key={index}>
+                    <FiberManualRecordIcon id={`Tipo${data[index].name}`} />
+                    {type}
+                    <h3 style={{ paddingLeft: "1.5rem" }}>
+                      {data[index].value}
+                    </h3>
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  } else {
+    return "missing data";
+  }
 }

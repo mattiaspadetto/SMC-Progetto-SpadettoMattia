@@ -26,7 +26,6 @@
     "eject": "react-scripts eject",
     "dataActionsDocs": "json-server --watch dataActionsDocs.json --port 8030",
     "server-postRequest": "json-server --watch db.json --port 8005",
-    "dataTypeDocs": "json-server --watch dataTypeDocs.json --port 8040"
   },
   "eslintConfig": {
     "extends": [
