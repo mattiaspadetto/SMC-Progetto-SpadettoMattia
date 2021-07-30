@@ -53,27 +53,55 @@ export default function ContentDashboard() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const startDataTime =
-    state.period === "weeks"
-      ? state.date.startOf("week").day + "/" + state.date.startOf("week").month
-      : state.period === "months"
-      ? state.date.startOf("month").day +
-        "/" +
-        state.date.startOf("month").month
-      : state.date.startOf("year").day + "/" + state.date.startOf("year").month;
+  const startDataTime = () => {
+    switch (state.period) {
+      case "weeks":
+        return (
+          state.date.startOf("week").day +
+          "/" +
+          state.date.startOf("week").month
+        );
+      case "months":
+        return (
+          state.date.startOf("month").day +
+          "/" +
+          state.date.startOf("month").month
+        );
+      case "years":
+        return (
+          state.date.startOf("year").day +
+          "/" +
+          state.date.startOf("year").month
+        );
+      default:
+        return null;
+    }
+  };
 
-  const endDataTime =
-    state.period === "weeks"
-      ? state.date.endOf("week").day + "/" + state.date.endOf("week").month
-      : state.period === "months"
-      ? state.date.endOf("month").day + "/" + state.date.endOf("month").month
-      : state.date.endOf("year").day + "/" + state.date.endOf("year").month;
+  const endDataTime = () => {
+    switch (state.period) {
+      case "weeks":
+        return (
+          state.date.endOf("week").day + "/" + state.date.endOf("week").month
+        );
+      case "months":
+        return (
+          state.date.endOf("month").day + "/" + state.date.endOf("month").month
+        );
+      case "years":
+        return (
+          state.date.endOf("year").day + "/" + state.date.endOf("year").month
+        );
+      default:
+        return null;
+    }
+  };
 
   const requestToServer = {
     spazio: state.space,
     azioniDocumenti: state.actionsDocs,
-    dataInizio: startDataTime,
-    dataFine: endDataTime,
+    dataInizio: startDataTime(),
+    dataFine: endDataTime(),
     anno: state.date.year,
     periodoVisualizzazione: state.period,
   };
@@ -84,8 +112,8 @@ export default function ContentDashboard() {
     body: JSON.stringify(requestToServer),
   })
     .then((response) => response.json())
-    .then((data) => {
-      console.log("Success", data);
+    .then(() => {
+      console.log("Success");
     })
     .catch((error) => {
       console.error("Error:", error);
